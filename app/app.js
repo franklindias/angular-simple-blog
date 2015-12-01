@@ -1,5 +1,5 @@
 
-var app = angular.module( 'app', ['ngRoute'] );
+var app = angular.module( 'app', ["ngRoute", "firebase"] );
 
 app.config( function( $routeProvider, $locationProvider ) {
 
@@ -12,12 +12,12 @@ app.config( function( $routeProvider, $locationProvider ) {
 
 		.when( '/', {
 			templateUrl: 'app/views/posts.html',
-			controller: 'HomeCtrl',
+			controller: 'HomeController',
 		})
 
 		.when( '/about', {
 			templateUrl: 'app/views/about.html',
-			controller: 'AboutCtrl',
+			controller: 'AboutController',
 		})
 
 		.otherwise( { redirectTo: '/' } );

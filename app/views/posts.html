@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" ng-controller="PostsController">
 
 	<ol class="breadcrumb">
 		<li class="active">Home</li>
@@ -10,50 +10,14 @@
 	<div class="row">
 
 		<div class="col-md-8">
-			<section id="posts">
-				<div class="media">
+			<section id="posts" ng-repeat="post in posts">
+				<div id="{{post.id}}" class="media">
 					<div class="media-left">
 						<a href="#"><img class="media-object" src="http://unsplash.it/64/64"></a>
 					</div>
 					<div class="media-body">
-						<h4 class="media-heading">Post Title</h4>
-						<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate..</p>
-					</div>
-				</div>
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="media-object" src="http://unsplash.it/64/64"></a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">Post Title</h4>
-						<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate..</p>
-					</div>
-				</div>
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="media-object" src="http://unsplash.it/64/64"></a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">Post Title</h4>
-						<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate..</p>
-					</div>
-				</div>
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="media-object" src="http://unsplash.it/64/64"></a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">Post Title</h4>
-						<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate..</p>
-					</div>
-				</div>
-				<div class="media">
-					<div class="media-left">
-						<a href="#"><img class="media-object" src="http://unsplash.it/64/64"></a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">Post Title</h4>
-						<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate..</p>
+						<h4 class="media-heading">{{post.title}} <button class="btn btn-danger btn-xs" ng-click="posts.$remove(post)">X</button></h4>
+						<p>{{post.body}}</p>
 					</div>
 				</div>
 			</section>
@@ -61,6 +25,17 @@
 
 		<div class="col-md-4">
 			<h2>Sidebar</h2>
+			<form ng-submit="addPost()">
+				<div class="form-group">
+					<label for="">Title</label>
+					<input class="form-control" ng-model="title" />
+				</div>
+				<div class="form-group">
+					<label for="">Content</label>
+					<textarea class="form-control" ng-model="body" rows="10"></textarea>
+				</div>
+				<button class="btn btn-primary" type="submit">Add Post</button>
+			</form>
 		</div>
 
 	</div>
