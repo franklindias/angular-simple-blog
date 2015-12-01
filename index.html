@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Blog</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="app/app.css">
+</head>
+<body ng-app="app">
+
+	<div class="container">
+
+		<header id="header">
+			<h1>Simple Blog</h1>
+			<p>Let's learn how to build a simple blog using AngularJS and Firebase. :D</p>
+
+			<nav class="navbar navbar-inverse">
+				<ul class="nav navbar-nav">
+					<li ng-class="{active: pageUrl == '/'}" ><a href="#/">Home</a></li>
+					<li ng-class="{active: pageUrl == '/about'}" ><a href="#/about">About Us</a></li>
+				</ul>
+			</nav>
+
+		</header>
+		
+		<div ng-view></div>
+
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+	<script src="app/app.js"></script>
+	<script src="app/controllers/HomeCtrl.js"></script>
+	<script src="app/controllers/AboutCtrl.js"></script>
+</body>
+</html>
