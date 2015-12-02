@@ -20,6 +20,11 @@ app.config( function( $routeProvider, $locationProvider ) {
 			controller: 'AboutController',
 		})
 
+		.when( '/post/:id', {
+			templateUrl: 'app/views/single.html',
+			controller: 'PostsController',
+		})
+
 		.otherwise( { redirectTo: '/' } );
 
 });

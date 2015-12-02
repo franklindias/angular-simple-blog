@@ -1,0 +1,24 @@
+<div class="main" ng-controller="PostsController">
+
+	<div class="row">
+
+		<div class="col-md-8">
+
+			<section id="post-{{post.id}}">
+				<h1 class="post-title">{{post.title}}</h1>
+				<img class="img-responsive img-rounded" src="https://unsplash.it/800/300/?random" alt="{{post.title}}">
+				<hr>
+				<div class="post-content">
+					{{post.body}}
+				</div>
+			</section>
+
+		</div>
+
+		<div class="col-md-4">
+			<h2>Sidebar</h2>
+		</div>
+
+	</div>
+</div>
+
