@@ -7,17 +7,37 @@ app.controller( 'PostsController', function( $scope, $routeParams, $firebaseArra
 
 	$scope.addPost = function() {
 
-		$scope.alertMsg = "";
+		// $scope.alertMsg = null;
 
-		if ( ! ( $scope.title && $scope.body ) ) {
-			$scope.alertMsg = "It's necessary complete Title and Content fields!";
-			return;
-		}
+		// // if ( ! ( $scope.title && $scope.content ) ) {
+		// // 	$scope.alertMsg = "It's necessary complete Title and Content fields!";
+		// // 	return;
+		// // }
 
 		$scope.posts.$add({
 			title: $scope.title,
-			body: $scope.body
+			content: $scope.content,
+			date: Firebase.ServerValue.TIMESTAMP
 		});
+	};
+
+	$scope.editPost = function() {
+		var ref = new Firebase( postsUrl ).child( $routeParams.id );
+		ref.update({
+			title: $scope.post.title,
+			content: $scope.post.content,
+			date_modified: Firebase.ServerValue.TIMESTAMP,
+		});
+	};
+
+	$scope.addCategory = function() {
+		var ref = new Firebase( postsUrl ).child( $routeParams.id ).child( 'categories' );
+		ref.push( $scope.post.category );
+	};
+
+	$scope.removeCategory = function( $id ) {
+		var ref = new Firebase( postsUrl ).child( $routeParams.id ).child( 'categories' ).child( $id );
+		ref.remove();
 	};
 
 });

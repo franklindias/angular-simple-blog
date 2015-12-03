@@ -25,6 +25,18 @@ app.config( function( $routeProvider, $locationProvider ) {
 			controller: 'PostsController',
 		})
 
+		// Admin Views
+
+		.when( '/admin/:target?', {
+			templateUrl: 'app/views/admin/index.html',
+			controller: 'AdminController',
+		})
+
+		.when( '/admin/:action/:id', {
+			templateUrl: 'app/views/admin/index.html',
+			controller: 'AdminController',
+		})
+
 		.otherwise( { redirectTo: '/' } );
 
 });
