@@ -22,6 +22,6 @@ In this project we'll create a simple blog with post and user manager and authen
 [GPL v2.0](http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 ## References
-- [https://angularjs.org/](https://angularjs.org/)
+- [https://angularjs.org](https://angularjs.org)
 - [https://www.firebase.com/docs/web/libraries/angular/quickstart.html](https://www.firebase.com/docs/web/libraries/angular/quickstart.html)
-- [http://getbootstrap.com/](http://getbootstrap.com/)
+- [http://getbootstrap.com](http://getbootstrap.com)
