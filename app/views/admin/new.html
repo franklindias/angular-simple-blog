@@ -19,15 +19,15 @@
 					<p><strong>Categories</strong></p>
 
 					<div class="post-categories">
-						<span ng-repeat="(id, category) in categories">
-							<button class="btn btn-warning btn-sm" ng-click="removeCategory(id)">{{category}} &times;</button></li>
+						<span ng-repeat="(id, category) in categories" ng-if="$index > 0">
+							<button class="btn btn-info btn-sm" ng-click="removeCategory(id)">{{category}} &times;</button></li>
 						</span>
 					</div>
 
 					<br>
 
 					<div class="input-group">
-						<input class="form-control" type="text" placeholder="Category name.." ng-model="post.category">
+						<input class="form-control" type="text" placeholder="Category name.." ng-model="category">
 						<span class="input-group-btn">
 							<button class="btn btn-info" ng-click="addCategory()"><i class="glyphicon glyphicon-plus"></i></button>
 						</span>
@@ -37,11 +37,15 @@
 				<hr>
 				<div class="form-group">
 					<label for="thumbnail">Thumbnail</label>
-					<input type="file">
-					<p class="help-block">Upload the post thumbnail.</p>
+					<div ng-if="thumbnail" class="post-thumbnail">
+						<button class="btn btn-danger btn-xs" ng-click="removeThumbnail()">&times;</button>
+						<img class="img-responsive" ng-src="data:image/jpeg;base64,{{thumbnail.base64}}" alt="{{title}}" width="300">
+					</div>
+					<br>
+					<input type="file" ng-model="thumbnail" accept="image/*" maxsize="1000" base-sixty-four-input>
 				</div>
 				<hr>
-				<button type="submit" class="btn btn-success pull-right" ng-click="addPost()">Save</button>
+				<button type="submit" class="btn btn-success pull-right" ng-click="addPost()">Post</button>
 			</div>
 		</div>
 	</form>

@@ -1,5 +1,5 @@
 
-var app = angular.module( 'app', ["ngRoute", "firebase"] );
+var app = angular.module( 'app', ['ngRoute', 'firebase', 'naif.base64'] );
 
 app.config( function( $routeProvider, $locationProvider ) {
 

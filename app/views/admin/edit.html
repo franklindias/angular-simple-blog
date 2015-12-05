@@ -8,12 +8,6 @@
 					<label for="title">Title</label>
 					<input class="form-control" type="text" value="{{post.title}}" ng-model="post.title">
 				</div>
-				<label for="permalink">Permalink</label>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">{{baseUrl}}/post/</span>
-					<input type="text" class="form-control" value="{{post.$id}}">
-				</div>
-				<br>
 				<div class="form-group">
 					<label for="content">Content</label>
 					<textarea class="form-control" rows="10" ng-model="post.content">{{post.content}}</textarea>
@@ -25,7 +19,7 @@
 					<p><strong>Categories</strong></p>
 
 					<div class="post-categories">
-						<span ng-repeat="(id, category) in post.categories">
+						<span ng-repeat="(id, category) in post.categories" ng-if="$index > 0">
 							<button class="btn btn-warning btn-sm" ng-click="removeCategory(id)">{{category}} &times;</button></li>
 						</span>
 					</div>
@@ -43,8 +37,12 @@
 				<hr>
 				<div class="form-group">
 					<label for="thumbnail">Thumbnail</label>
-					<input type="file">
-					<p class="help-block">Upload the post thumbnail.</p>
+					<div ng-if="post.thumbnail" class="post-thumbnail">
+						<button class="btn btn-danger btn-xs" ng-click="removeThumbnail()">&times;</button>
+						<img class="img-responsive" ng-src="data:image/jpeg;base64,{{post.thumbnail.base64}}" alt="{{post.title}}" width="300">
+					</div>
+					<br>
+					<input type="file" ng-model="post.thumbnail" accept="image/*" maxsize="1000" base-sixty-four-input>
 				</div>
 				<hr>
 				<button type="submit" class="btn btn-success pull-right" ng-click="editPost()">Save</button>

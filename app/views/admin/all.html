@@ -17,10 +17,12 @@
 				<th scope="row">{{$index + 1}}</th>
 				<td>{{post.title}}</td>
 				<td>
-					<span ng-repeat="category in post.categories">{{category}}, </span>
+					<ol class="breadcrumb" style="background-color: transparent; margin:0; padding:0;">
+						<li ng-repeat="category in post.categories">{{category}}</li>
+					</ol>
 				</td>
-				<td>{{post.date}}</td>
-				<td>{{post.date_modified}}</td>
+				<td>{{post.date | date:'dd/MM/yyyy | HH:mm:ss'}}</td>
+				<td>{{post.date_modified | date:'dd/MM/yyyy | HH:mm:ss'}}</td>
 				<td>
 					<a href="#/admin/edit/{{post.$id}}" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
 					<button class="btn btn-danger btn-xs" ng-click="posts.$remove(post)"><i class="glyphicon glyphicon-trash"></i></button>
