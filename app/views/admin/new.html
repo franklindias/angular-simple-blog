@@ -19,7 +19,7 @@
 					<p><strong>Categories</strong></p>
 
 					<div class="post-categories">
-						<span ng-repeat="(id, category) in categories" ng-if="$index > 0">
+						<span ng-repeat="(id, category) in post.categories" ng-if="$index > 0">
 							<button class="btn btn-info btn-sm" ng-click="removeCategory(id)">{{category}} &times;</button></li>
 						</span>
 					</div>
@@ -34,6 +34,7 @@
 					</div>
 
 				</div>
+				{{thumbnail}}
 				<hr>
 				<div class="form-group">
 					<label for="thumbnail">Thumbnail</label>

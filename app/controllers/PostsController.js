@@ -1,77 +1,59 @@
 app.controller( 'PostsController', function( $routeParams, $location, $scope, $firebaseArray, $firebaseObject ) {
 
-	var postsUrl = 'https://simpe-blog.firebaseio.com/posts/';
-	$scope.categories = ['General'];
-	$scope.thumbnail = [''];
-	$scope.posts = $firebaseArray( new Firebase( postsUrl ) );
-	$scope.post = $firebaseObject( new Firebase( postsUrl + $routeParams.id ) );
+	var dataUrl = 'https://simpe-blog.firebaseio.com/posts/';
+	var form = [
+		{ name: 'title', value: '' },
+		{ name: 'content', value: '' },
+		{ name: 'categories', value: [''] },
+		{ name: 'thumbnail', value: '' },
+		{ name: 'date', value: Firebase.ServerValue.TIMESTAMP },
+	];
 
-	var hasPost = function() {
+	$scope.posts = $firebaseArray( new Firebase( dataUrl ) );
+	$scope.post = $firebaseObject( new Firebase( dataUrl + $routeParams.id ) );
 
-		if ( $scope.post.$id != 'undefined' ) {
-			return true;
-		}
+	if ( $scope.post.$id === 'undefined' ) {
+		var post = {};
 
-		return false;
-	};
-
-	$scope.addPost = function() {
-
-		// var onDone = function( res ) {
-		// 	$location.path( '/admin/edit/' + res.path.o[1] );
-		// };
-
-		$scope.posts.$add({
-			title: $scope.title,
-			content: $scope.content,
-			categories: $scope.categories,
-			thumbnail: $scope.thumbnail,
-			date: Firebase.ServerValue.TIMESTAMP,
-			date_modified: Firebase.ServerValue.TIMESTAMP,
+		form.map( function( el ) {
+			post[el.name] = el.value;
 		});
 
+		$scope.post = post;
+	}
+
+	$scope.addPost = function() {
+		$scope.posts.$add( $scope.post );
 	};
 
 	$scope.editPost = function() {
-		var post = new Firebase( postsUrl + $routeParams.id );
-		post.update({
-			title: $scope.post.title,
-			content: $scope.post.content,
-			categories: $scope.post.categories,
-			thumbnail: $scope.post.thumbnail,
-			date_modified: Firebase.ServerValue.TIMESTAMP,
+		var post = new Firebase( dataUrl + $routeParams.id )
+		  , postForm = {}
+		;
+
+		form.map( function( el ) {
+			postForm[el.name] = ( $scope.post[el.name] );
 		});
+
+		postForm['date_modified'] = Firebase.ServerValue.TIMESTAMP;
+
+		post.update( postForm );
 	};
 
 	$scope.addCategory = function() {
-
-		if ( ! hasPost() ) {
-			$scope.categories.push( $scope.category );
-			$scope.category = null;
-			return;
-		}
-
-		$scope.post.categories.push( $scope.post.category );
-		$scope.post.category = null;
+		$scope.post.categories.push( $scope.category );
+		$scope.category = null;
+		return;
 	};
 
 	$scope.removeCategory = function( $id ) {
-
-		if ( ! hasPost() ) {
-			$scope.categories.splice( $id, 1 );
-			return;
-		}
-
 		$scope.post.categories.splice( $id, 1 );
+		return;
 	};
 
 	$scope.removeThumbnail = function() {
-		if ( ! hasPost() ) {
-			$scope.thumbnail = '';
-			return;
-		}
-
 		$scope.post.thumbnail = '';
+		return;
 	};
 
 });
