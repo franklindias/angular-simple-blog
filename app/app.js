@@ -1,7 +1,20 @@
 
 var app = angular.module( 'app', ['ngRoute', 'firebase', 'naif.base64'] );
 
-app.config( function( $routeProvider, $locationProvider ) {
+app.factory( 'Auth', ['$firebaseAuth', function( $firebaseAuth ) {
+	var ref = new Firebase( 'https://simpe-blog.firebaseio.com/' );
+	return $firebaseAuth(ref);
+}]);
+
+app.run( ['$rootScope', '$location', function( $rootScope, $location ) {
+	$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
+		if (error === 'AUTH_REQUIRED') {
+			$location.path( '/login' );
+		}
+	});
+}]);
+
+app.config( ['$routeProvider', function( $routeProvider, $locationProvider ) {
 
 	// $locationProvider.html5Mode({
 	// 		enabled: true,
@@ -12,12 +25,27 @@ app.config( function( $routeProvider, $locationProvider ) {
 
 		.when( '/', {
 			templateUrl: 'app/views/posts.html',
-			controller: 'HomeController',
+			controller: 'HomeController'
+		})
+
+		.when( '/login', {
+			templateUrl: 'app/views/login.html',
+			controller: 'LoginController',
+			resolve: {
+				'currentAuth': ['Auth', function(Auth) {
+					return Auth.$waitForAuth();
+				}]
+			}
 		})
 
 		.when( '/about', {
 			templateUrl: 'app/views/about.html',
 			controller: 'AboutController',
+			resolve: {
+				'currentAuth': ['Auth', function(Auth) {
+					return Auth.$requireAuth();
+				}]
+			}
 		})
 
 		.when( '/post/:id', {
@@ -39,4 +67,4 @@ app.config( function( $routeProvider, $locationProvider ) {
 
 		.otherwise( { redirectTo: '/' } );
 
-});
+}]);
