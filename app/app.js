@@ -1,6 +1,15 @@
 
 var app = angular.module( 'app', ['ngRoute', 'firebase', 'naif.base64'] );
 
+app.constant( 'firebaseRef', new Firebase( 'https://simpe-blog.firebaseio.com/' ) );
+
+app.value( 'currentUser', {
+	id: '',
+	email: '',
+	avatar: '',
+	isLogged: false,
+});
+
 app.factory( 'Auth', ['$firebaseAuth', function( $firebaseAuth ) {
 	var ref = new Firebase( 'https://simpe-blog.firebaseio.com/' );
 	return $firebaseAuth(ref);
@@ -24,8 +33,7 @@ app.config( ['$routeProvider', function( $routeProvider, $locationProvider ) {
 	$routeProvider
 
 		.when( '/', {
-			templateUrl: 'app/views/posts.html',
-			controller: 'HomeController'
+			templateUrl: 'app/views/posts.html'
 		})
 
 		.when( '/login', {
@@ -38,22 +46,22 @@ app.config( ['$routeProvider', function( $routeProvider, $locationProvider ) {
 			}
 		})
 
-		.when( '/about', {
-			templateUrl: 'app/views/about.html',
-			controller: 'AboutController',
-			resolve: {
-				'currentAuth': ['Auth', function(Auth) {
-					return Auth.$requireAuth();
-				}]
-			}
-		})
-
 		.when( '/post/:id', {
 			templateUrl: 'app/views/single.html',
 			controller: 'PostsController',
 		})
 
 		// Admin Views
+
+		.when( '/admin', {
+			templateUrl: 'app/views/admin/index.html',
+			controller: 'AdminController',
+			resolve: {
+				'currentAuth': ['Auth', function(Auth) {
+					return Auth.$requireAuth();
+				}]
+			}
+		})
 
 		.when( '/admin/:target?', {
 			templateUrl: 'app/views/admin/index.html',

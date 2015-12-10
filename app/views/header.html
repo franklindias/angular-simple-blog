@@ -1,13 +1,30 @@
 <header id="header">
-	<h1 class="site-title">
-		<a href="#/">Simple Blog</a>
-	</h1>
-	<p>Let's learn how to build a simple blog using AngularJS and Firebase. :D</p>
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="site-title">
+				<a href="#/">Simple Blog</a>
+			</h1>
+			<p>Let's learn how to build a simple blog using AngularJS and Firebase. :D</p>
+		</div>
+		<div class="col-md-4">
+			<div class="login-header" ng-controller="LoginController">
+				<div class="logged" ng-show="user">
+					<img class="avatar pull-left" src="{{user.avatar}}" alt="">
+					<p><i class="glyphicon glyphicon-user"></i> Welcome, <strong>{{user.name}}</strong></p>
+					<p><i class="glyphicon glyphicon-envelope"></i> {{user.email}}</p>
+					<button class="btn btn-danger btn-xs pull-right" ng-click="logout()">Logout</button>
+				</div>
+				<div class="unlogged" ng-hide="user">
+					<a href="#/login" class="btn btn-primary">Login</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<nav class="navbar navbar-inverse">
 		<ul class="nav navbar-nav">
 			<li ng-class="{active: pageUrl == '/'}" ><a href="#/">Home</a></li>
-			<li ng-class="{active: pageUrl == '/about'}" ><a href="#/about">About Us</a></li>
+			<li ng-class="{active: pageUrl == '/admin'}" ><a href="#/admin">Admin</a></li>
 		</ul>
 	</nav>
 

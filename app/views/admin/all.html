@@ -12,7 +12,7 @@
 				<th>Actions</th>
 			</tr>
 		</thead>
-		<tbody ng-repeat="post in posts">
+		<tbody ng-repeat="post in posts | filter: currentUser()">
 			<tr>
 				<th scope="row">{{$index + 1}}</th>
 				<td>{{post.title}}</td>

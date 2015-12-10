@@ -10,14 +10,14 @@
 				<div id="{{post.id}}" class="media">
 					<div class="media-left">
 						<a href="#/post/{{post.$id}}">
-							<img class="media-object img-rounded" src="https://unsplash.it/300/200/?random">
+							<img class="media-object img-rounded" ng-src="data:image/jpeg;base64,{{post.thumbnail.base64}}" width="150">
 						</a>
 					</div>
 					<div class="media-body">
 						<h3 class="media-heading">
 							<a href="#/post/{{post.$id}}">{{post.title}}</a>
 						</h3>
-						<p>{{post.body}}</p>
+						<p>{{ getExcerpt( post.content ) }}</p>
 					</div>
 				</div>
 				<br>

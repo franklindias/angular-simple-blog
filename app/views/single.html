@@ -6,11 +6,29 @@
 
 			<section id="post-{{post.id}}">
 				<h1 class="post-title">{{post.title}}</h1>
-				<img class="img-responsive img-rounded" src="https://unsplash.it/800/300/?random" alt="{{post.title}}">
-				<hr>
+				<img class="img-responsive img-rounded" ng-src="data:image/jpeg;base64,{{post.thumbnail.base64}}" alt="{{post.title}}">
+				<br>
 				<div class="post-content">
 					{{post.content}}
 				</div>
+
+				<hr>
+
+				<div class="post-author">
+					<h2>Author</h2>
+					<div id="{{post.id}}" class="media">
+						<div class="media-left">
+							<!-- <img class="media-object img-rounded" ng-src="data:image/jpeg;base64,{{post.thumbnail.base64}}" width="150"> -->
+						</div>
+						<div class="media-body">
+							<h3 class="media-heading">
+								<a href="#">Fabio Carvalho</a>
+							</h3>
+							<p>My Bio</p>
+						</div>
+					</div>
+				</div>
+
 			</section>
 
 		</div>

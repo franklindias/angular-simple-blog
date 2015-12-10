@@ -1,18 +1,23 @@
-app.controller( 'LoginController', ['currentAuth', '$scope', '$location', function( currentAuth, $scope, $location ) {
+app.controller( 'LoginController', ['$scope', '$location', '$firebaseObject', 'firebaseRef', 'currentUser',
+	function( $scope, $location, $firebaseObject, firebaseRef, currentUser ) {
 
-	$scope.login = function() {
-		// $location.path( '/about' );
-		var ref = new Firebase( 'https://simpe-blog.firebaseio.com/' );
-		ref.authWithPassword({
-			email: $scope.email,
-			password: $scope.password
-		}, function( error, authData ){
-			if ( error ) {
-				$scope.errorMsg = error;
-			} else {
-				
-			}
-		});	
-	}
+		var authData = firebaseRef.getAuth();
+
+		if ( authData ) {
+			currentUser.id       = authData.uid;
+			currentUser.email    = authData.password.email;
+			currentUser.avatar   = authData.password.profileImageURL;
+			currentUser.isLogged = true;
+
+			$scope.user = $firebaseObject( firebaseRef.child( 'users' ).child( currentUser.id ) );
+		}
+
+		$scope.logout = function() {
+			$location.path( '/login' );
+			firebaseRef.unauth();
+		}
+
+		console.log( authData );
 		
-}]);
+	}
+]);

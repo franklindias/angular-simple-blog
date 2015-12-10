@@ -1,3 +1,29 @@
 .post-categories button {
 	margin-bottom: 5px;
 }
+
+.login-form {
+	margin: 100px auto;
+	max-width: 100%;
+	width: 400px;
+}
+
+.login-form h2 {
+	margin-bottom: 25px;
+}
+
+.user-avatar {
+	margin-bottom: 10px;
+}
+
+.login-header {
+	background-color: #F2F2F2;
+	border-radius: 5px;
+	margin: 10px 0;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.login-header .avatar {
+	margin-right: 10px;
+}
