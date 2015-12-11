@@ -1,6 +1,10 @@
 app.controller( 'ProfileController', ['$scope', '$location', '$firebaseObject', 'firebaseRef', 'currentUser',
 	function( $scope, $location, $firebaseObject, firebaseRef, currentUser ) {
 
+		if ( currentUser.id === null ) {
+			return;
+		}
+
 		var user = firebaseRef.child( 'users' ).child( currentUser.id );
 		$scope.user = $firebaseObject( user );
 

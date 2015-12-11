@@ -7,16 +7,16 @@
 			<p>Let's learn how to build a simple blog using AngularJS and Firebase. :D</p>
 		</div>
 		<div class="col-md-4">
-			<div class="login-header" ng-controller="LoginController">
-				<div class="logged" ng-show="user">
+			<div class="login-header" ng-controller="AuthController">
+				<div class="logged">
 					<img class="avatar pull-left" src="{{user.avatar}}" alt="">
 					<p><i class="glyphicon glyphicon-user"></i> Welcome, <strong>{{user.name}}</strong></p>
 					<p><i class="glyphicon glyphicon-envelope"></i> {{user.email}}</p>
 					<button class="btn btn-danger btn-xs pull-right" ng-click="logout()">Logout</button>
 				</div>
-				<div class="unlogged" ng-hide="user">
+				<!-- <div class="unlogged" ng-hide="user">
 					<a href="#/login" class="btn btn-primary">Login</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

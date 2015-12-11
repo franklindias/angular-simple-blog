@@ -3,12 +3,7 @@ var app = angular.module( 'app', ['ngRoute', 'firebase', 'naif.base64'] );
 
 app.constant( 'firebaseRef', new Firebase( 'https://simpe-blog.firebaseio.com/' ) );
 
-app.value( 'currentUser', {
-	id: '',
-	email: '',
-	avatar: '',
-	isLogged: false,
-});
+app.value( 'currentUser', { id: null } );
 
 app.factory( 'Auth', ['$firebaseAuth', function( $firebaseAuth ) {
 	var ref = new Firebase( 'https://simpe-blog.firebaseio.com/' );
